@@ -1,4 +1,4 @@
-*kdevbox* is an ultra lightweight linux kernel development toolkit.
+**kdevbox** is an ultra lightweight linux kernel development toolkit.
 
 Point it to a kernel image and it will be executed inside a local KVM instance,
 with a very small ramdisk as its root filesystem containing only Busybox.
@@ -34,7 +34,9 @@ around ~20s.
 
 KVM will be started and the VM output (serial console) will be multiplexed to the
 your terminal, via a termunal emulator implemented by QEMU. Use `C-a h` for a
-list of available control commands (hint: `C-a x` terminates the VM).
+list of available control commands (hint: `C-a x` terminates the VM). This is
+nice because all your `printks` will be right there at your face. No need to
+inspect log files.
 
 All files inside the image directory will be available at the `/` inside the VM.
 Feel free to tweak `image/init` and add your own custom initialization tasks
