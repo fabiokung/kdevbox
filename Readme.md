@@ -38,8 +38,8 @@ list of available control commands (hint: `C-a x` terminates the VM). This is
 nice because all your `printks` will be right there at your face. No need to
 inspect log files.
 
-All files inside the image directory will be available at the `/` inside the VM.
-Feel free to tweak `image/init` and add your own custom initialization tasks
+All files inside the image directory will be available at `/` inside the VM. Feel
+free to tweak `image/init` and add your own custom initialization tasks
 (such as mounting filesystems, configuring network or loading modules).
 
 ## Credits
