@@ -2,7 +2,6 @@
 set -e
 
 KDEVBOX_HOME=$(cd $(dirname $0)/. ; pwd)
-echo HOME: $KDEVBOX_HOME
 
 [[ -z "$1" ]] && {
     echo "Usage: $(basename $0) path/to/bzImage"
