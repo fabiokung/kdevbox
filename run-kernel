@@ -36,10 +36,11 @@ which qemu-system-x86_64 >/dev/null || {
 
 cp $busybox $KDEVBOX_HOME/image/busybox
 
-echo -n "Generating the initrd image: "
+echo -n "--> Generating the initrd image: "
 ( cd $KDEVBOX_HOME/image && find . -not -name "\.gitignore" | cpio -o -H newc ) \
     | gzip > $KDEVBOX_HOME/busybox-initrd.gz
 
+echo "--> Starting KVM"
 exec qemu-system-x86_64 \
     -kernel $1 \
     -initrd $KDEVBOX_HOME/busybox-initrd.gz \
