@@ -33,7 +33,7 @@ around ~20s.
     ```
 
 KVM will be started and the VM output (serial console) will be multiplexed to the
-your terminal, via a termunal emulator implemented by QEMU. Use `C-a h` for a
+your terminal, via a terminal emulator implemented by QEMU. Use `C-a h` for a
 list of available control commands (hint: `C-a x` terminates the VM). This is
 nice because all your `printks` will be right there at your face. No need to
 inspect log files.
