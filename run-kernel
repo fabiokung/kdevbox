@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -e
+
+KDEVBOX_HOME=$(cd $(dirname $0)/. ; pwd)
+echo HOME: $KDEVBOX_HOME
+
+[[ -z "$1" ]] && {
+    echo "Usage: $(basename $0) path/to/bzImage"
+    exit 1
+}
+
+busybox=$(which busybox)
+[[ -z "$busybox" ]] && {
+    echo "Please install busybox-static" >&2
+    exit 1
+}
+
+which cpio >/dev/null || {
+    echo "Please install cpio" >&2
+    exit 1
+}
+
+which gzip >/dev/null || {
+    echo "Please install cpio" >&2
+    exit 1
+}
+
+which qemu-system-x86_64 >/dev/null || {
+    echo "Please install qemu-system-x86 (kvm)" >&2
+    exit 1
+}
+
+( $busybox --list | grep static-sh >/dev/null ) || {
+    echo "$busybox isn't statically compiled. Please install busybox-static" >&2
+    exit 1
+}
+
+cp $busybox $KDEVBOX_HOME/image/busybox
+
+echo -n "Generating the initrd image: "
+( cd $KDEVBOX_HOME/image && find . -not -name "\.gitignore" | cpio -o -H newc ) \
+    | gzip > $KDEVBOX_HOME/busybox-initrd.gz
+
+exec qemu-system-x86_64 \
+    -kernel $1 \
+    -initrd $KDEVBOX_HOME/busybox-initrd.gz \
+    -append "console=ttyS0" \
+    -nographic
