@@ -1,7 +1,14 @@
-# Ultra lightweight linux kernel development toolkit
+*kdevbox* is an ultra lightweight linux kernel development toolkit.
+
+Point it to a kernel image and it will be executed inside a local KVM instance,
+with a very small ramdisk as its root filesystem containing only Busybox.
+
+I use this to hack on the Linux kernel with an extremely fast feedback cycle,
+around ~20s.
 
 ## Dependencies
 
+* a Linux box
 * KVM: `apt-get install qemu-system-x86`
 * busybox (statically compiled): `apt-get install busybox-static`
 * cpio, to generate initrd image files: `apt-get install cpio`
@@ -10,11 +17,11 @@
 
 ## Usage
 
-1.  download a linux kernel tree source
+1.  get a linux kernel source tree
 
 1.  make changes
 
-1.  build it (eg.: `make oldconfig && make`), and make sure it has a
+1.  build it (eg.: `make oldconfig && make`), and make sure it produced an
     `arch/x86/boot/bzImage` image file.
 
 1.  run your kernel into a lightweight KVM instance with a very small
