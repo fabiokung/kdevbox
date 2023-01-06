@@ -10,4 +10,10 @@ mount -t tmpfs none /tmp
 #insmod mymodule.ko
 #ifconfig eth0 10.0.0.2/24 up
 
-exec /bin/sh -i
+echo "You are now in $(uname -r) under QEMU"
+echo "Press C-a h for QEMU help"
+
+# See https://github.com/brgl/busybox/blob/master/shell/cttyhack.c
+# For more information about how cttyhack enabled job control on basic serial consoles
+mknod -m 666 /dev/ttyS0 c 4 64
+exec setsid cttyhack /bin/sh -i
